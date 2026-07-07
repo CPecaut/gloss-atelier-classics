@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "setId": "world-classics-seed",
+  "chunkId": "herodotus-histories-0148",
+  "sourceId": "herodotus-histories",
+  "stage": "illustration",
+  "owner": "@you",
+  "status": "active",
+  "claimedAt": "2026-07-07T09:55:23.484Z",
+  "expiresAt": "2026-07-08T09:55:23.591Z",
+  "branchHint": "work/world-classics-seed/illustration/herodotus-histories-0148-you",
+  "promptFile": "herodotus-histories-0148--you.prompt.md",
+  "runNote": "Random 3-chunk section kickoff, companion translation+illustration run."
+}

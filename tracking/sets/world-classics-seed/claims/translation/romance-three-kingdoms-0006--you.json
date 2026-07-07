@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "setId": "world-classics-seed",
+  "chunkId": "romance-three-kingdoms-0006",
+  "sourceId": "romance-three-kingdoms",
+  "stage": "translation",
+  "owner": "@you",
+  "status": "active",
+  "claimedAt": "2026-07-07T09:55:23.484Z",
+  "expiresAt": "2026-07-08T09:55:23.590Z",
+  "branchHint": "work/world-classics-seed/translation/romance-three-kingdoms-0006-you",
+  "promptFile": "romance-three-kingdoms-0006--you.prompt.md",
+  "runNote": "Random 3-chunk section kickoff, companion translation+illustration run."
+}

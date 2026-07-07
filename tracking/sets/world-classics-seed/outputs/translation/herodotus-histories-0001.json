@@ -1,0 +1,522 @@
+{
+  "version": 1,
+  "setId": "world-classics-seed",
+  "chunkId": "herodotus-histories-0001",
+  "stage": "translation",
+  "owner": "@you",
+  "status": "submitted",
+  "submittedAt": "2026-07-07T08:24:02Z",
+  "notes": "Planned span 0-0.1% snapped to the nearest natural CTS section boundary: Herodotus, Histories 1.1.0-1.1.4.",
+  "artifact": {
+    "source": {
+      "work": "Herodotus, Histories",
+      "originalTitle": "Ἱστορίαι",
+      "language": "Ancient Greek",
+      "sourceUrl": "https://raw.githubusercontent.com/PerseusDL/canonical-greekLit/master/data/tlg0016/tlg001/tlg0016.tlg001.perseus-grc2.xml",
+      "browseUrl": "https://scaife.perseus.org/library/urn:cts:greekLit:tlg0016/",
+      "repository": "https://github.com/PerseusDL/canonical-greekLit",
+      "ctsUrn": "urn:cts:greekLit:tlg0016.tlg001.perseus-grc2",
+      "unitPattern": "book.chapter.section",
+      "sourceRefs": [
+        "1.1.0",
+        "1.1.1",
+        "1.1.2",
+        "1.1.3",
+        "1.1.4"
+      ],
+      "ctsRefs": [
+        "urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:1.1.0",
+        "urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:1.1.1",
+        "urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:1.1.2",
+        "urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:1.1.3",
+        "urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:1.1.4"
+      ],
+      "plannedCoverage": {
+        "startPercent": 0,
+        "endPercent": 0.1
+      },
+      "actualBoundary": {
+        "startRef": "1.1.0",
+        "endRef": "1.1.4",
+        "startPercentApprox": 0,
+        "endPercentApprox": 0.106583
+      },
+      "snapMethod": {
+        "naturalUnit": "CTS section",
+        "normalization": "Parsed Perseus TEI section nodes in source order and normalized whitespace for character-offset calculation.",
+        "totalNormalizedChars": 1171855,
+        "targetEndOffsetChars": 1171.855,
+        "candidateBoundaries": [
+          {
+            "afterRef": "1.1.3",
+            "offsetChars": 972,
+            "percentApprox": 0.082945,
+            "distanceFromTargetChars": 199.855
+          },
+          {
+            "afterRef": "1.1.4",
+            "offsetChars": 1249,
+            "percentApprox": 0.106583,
+            "distanceFromTargetChars": 77.145
+          },
+          {
+            "afterRef": "1.2.1",
+            "offsetChars": 1630,
+            "percentApprox": 0.139096,
+            "distanceFromTargetChars": 458.145
+          }
+        ],
+        "decision": "Ended after 1.1.4 because it is the nearest section boundary to the 0.1% target. The next chunk should begin after 1.1.4 to avoid overlap."
+      }
+    },
+    "sourceExcerptReferences": [
+      {
+        "ref": "1.1.0",
+        "greek": "Ἡροδότου Ἁλικαρνησσέος ἱστορίης ἀπόδεξις ἥδε, ὡς μήτε τὰ γενόμενα ἐξ ἀνθρώπων τῷ χρόνῳ ἐξίτηλα γένηται, μήτε ἔργα μεγάλα τε καὶ θωμαστά, τὰ μὲν Ἕλλησι τὰ δὲ βαρβάροισι ἀποδεχθέντα, ἀκλεᾶ γένηται, τά τε ἄλλα καὶ διʼ ἣν αἰτίην ἐπολέμησαν ἀλλήλοισι."
+      },
+      {
+        "ref": "1.1.1",
+        "greek": "Περσέων μέν νυν οἱ λόγιοι Φοίνικας αἰτίους φασὶ γενέσθαι τῆς διαφορῆς. τούτους γὰρ ἀπὸ τῆς Ἐρυθρῆς καλεομένης θαλάσσης ἀπικομένους ἐπὶ τήνδε τὴν θάλασσαν, καὶ οἰκήσαντας τοῦτον τὸν χῶρον τὸν καὶ νῦν οἰκέουσι, αὐτίκα ναυτιλίῃσι μακρῇσι ἐπιθέσθαι, ἀπαγινέοντας δὲ φορτία Αἰγύπτιά τε καὶ Ἀσσύρια τῇ τε ἄλλῃ ἐσαπικνέεσθαι καὶ δὴ καὶ ἐς Ἄργος."
+      },
+      {
+        "ref": "1.1.2",
+        "greek": "τὸ δὲ Ἄργος τοῦτον τὸν χρόνον προεῖχε ἅπασι τῶν ἐν τῇ νῦν Ἑλλάδι καλεομένῃ χωρῇ. ἀπικομένους δὲ τούς Φοίνικας ἐς δὴ τὸ Ἄργος τοῦτο διατίθεσθαι τὸν φόρτον."
+      },
+      {
+        "ref": "1.1.3",
+        "greek": "πέμπτῃ δὲ ἢ ἕκτῃ ἡμέρῃ ἀπʼ ἧς ἀπίκοντο, ἐξεμπολημένων σφι σχεδόν πάντων, ἐλθεῖν ἐπὶ τὴν θάλασσαν γυναῖκας ἄλλας τε πολλάς καὶ δὴ καὶ τοῦ βασιλέος θυγατέρα· τὸ δέ οἱ οὔνομα εἶναι, κατὰ τὠυτὸ τὸ καὶ Ἕλληνές λέγουσι, Ἰοῦν τὴν Ἰνάχου·"
+      },
+      {
+        "ref": "1.1.4",
+        "greek": "ταύτας στάσας κατά πρύμνην τῆς νεὸς ὠνέεσθαι τῶν φορτίων τῶν σφι ἦν θυμός μάλιστα· καὶ τοὺς Φοίνικας διακελευσαμένους ὁρμῆσαι ἐπʼ αὐτάς. τὰς μὲν δὴ πλεῦνας τῶν γυναικῶν ἀποφυγεῖν, τὴν δὲ Ἰοῦν σὺν ἄλλῃσι ἁρπασθῆναι. ἐσβαλομένους δὲ ἐς τὴν νέα οἴχεσθαι ἀποπλέοντας ἐπʼ Αἰγύπτου."
+      }
+    ],
+    "literalTranslations": [
+      {
+        "ref": "1.1.0",
+        "translation": "This is the presentation of the inquiry of Herodotus of Halicarnassus: so that neither the things that have come to pass among human beings may become faded away by time, nor great and wondrous deeds, some displayed by Greeks and others by non-Greeks, may become without fame, and also, among other matters, the cause for which they made war on one another."
+      },
+      {
+        "ref": "1.1.1",
+        "translation": "Now the learned men of the Persians say that the Phoenicians became responsible for the dispute. For these people, having come from the sea called Red to this sea here, and having settled the region which they still inhabit now, at once set themselves to long sea voyages, carrying Egyptian and Assyrian cargoes and arriving both elsewhere and especially at Argos."
+      },
+      {
+        "ref": "1.1.2",
+        "translation": "At that time Argos held first place among all places in the land now called Hellas. When the Phoenicians arrived at this Argos, they set out their cargo for sale."
+      },
+      {
+        "ref": "1.1.3",
+        "translation": "On the fifth or sixth day after they arrived, when almost everything had been sold by them, many women came down to the sea, including the daughter of the king; her name was, according to the very same account that the Greeks also give, Io daughter of Inachus."
+      },
+      {
+        "ref": "1.1.4",
+        "translation": "As these women stood by the stern of the ship, they were buying the wares for which they had the greatest desire; and the Phoenicians, after urging one another on, rushed upon them. Most of the women escaped, but Io was seized together with others. After putting them into the ship, they went off sailing away toward Egypt."
+      }
+    ],
+    "readerTranslations": [
+      {
+        "ref": "1.1.0",
+        "translation": "Here Herodotus of Halicarnassus sets out his inquiry: so that human events will not be erased by time, so that the great and astonishing deeds of Greeks and non-Greeks alike will not lose their fame, and so that the cause of their war with one another may be known."
+      },
+      {
+        "ref": "1.1.1",
+        "translation": "Persian authorities say the Phoenicians were responsible for the quarrel. They had come from the sea called the Red Sea to the Mediterranean, settled the coast they still occupy, and quickly took up long-distance seafaring. Carrying Egyptian and Assyrian goods, they traded in many places, including Argos."
+      },
+      {
+        "ref": "1.1.2",
+        "translation": "At that time Argos was the leading place in the land now called Greece. When the Phoenicians reached Argos, they displayed their cargo for sale."
+      },
+      {
+        "ref": "1.1.3",
+        "translation": "On the fifth or sixth day after their arrival, when nearly everything had been sold, many women came down to the shore. Among them was the king's daughter, whose name, as the Greeks also say, was Io daughter of Inachus."
+      },
+      {
+        "ref": "1.1.4",
+        "translation": "While the women stood near the ship's stern buying the goods that most caught their fancy, the Phoenicians gave one another the word and rushed at them. Most escaped, but Io and some others were seized, thrown aboard, and carried off by ship toward Egypt."
+      }
+    ],
+    "combinedReaderTranslation": "Here Herodotus of Halicarnassus sets out his inquiry: so that human events will not be erased by time, so that the great and astonishing deeds of Greeks and non-Greeks alike will not lose their fame, and so that the cause of their war with one another may be known. Persian authorities say the Phoenicians were responsible for the quarrel. They had come from the sea called the Red Sea to the Mediterranean, settled the coast they still occupy, and quickly took up long-distance seafaring. Carrying Egyptian and Assyrian goods, they traded in many places, including Argos. At that time Argos was the leading place in the land now called Greece. When the Phoenicians reached Argos, they displayed their cargo for sale. On the fifth or sixth day after their arrival, when nearly everything had been sold, many women came down to the shore. Among them was the king's daughter, whose name, as the Greeks also say, was Io daughter of Inachus. While the women stood near the ship's stern buying the goods that most caught their fancy, the Phoenicians gave one another the word and rushed at them. Most escaped, but Io and some others were seized, thrown aboard, and carried off by ship toward Egypt.",
+    "glosses": [
+      {
+        "ref": "1.1.0",
+        "greek": "Ἡροδότου",
+        "lemma": "Ἡρόδοτος",
+        "morphology": "genitive singular masculine",
+        "gloss": "of Herodotus"
+      },
+      {
+        "ref": "1.1.0",
+        "greek": "Ἁλικαρνησσέος",
+        "lemma": "Ἁλικαρνησσεύς",
+        "morphology": "genitive singular masculine",
+        "gloss": "of Halicarnassus"
+      },
+      {
+        "ref": "1.1.0",
+        "greek": "ἱστορίης ἀπόδεξις",
+        "lemma": "ἱστορίη / ἀπόδεξις",
+        "morphology": "genitive noun plus nominative noun",
+        "gloss": "presentation of inquiry"
+      },
+      {
+        "ref": "1.1.0",
+        "greek": "ἥδε",
+        "lemma": "ὅδε",
+        "morphology": "nominative singular feminine demonstrative",
+        "gloss": "this"
+      },
+      {
+        "ref": "1.1.0",
+        "greek": "ὡς",
+        "lemma": "ὡς",
+        "morphology": "conjunction",
+        "gloss": "so that"
+      },
+      {
+        "ref": "1.1.0",
+        "greek": "μήτε ... μήτε",
+        "lemma": "μήτε",
+        "morphology": "paired negative particles",
+        "gloss": "neither ... nor"
+      },
+      {
+        "ref": "1.1.0",
+        "greek": "τὰ γενόμενα",
+        "lemma": "γίγνομαι",
+        "morphology": "aorist middle participle, neuter plural substantive",
+        "gloss": "the things that happened"
+      },
+      {
+        "ref": "1.1.0",
+        "greek": "ἐξ ἀνθρώπων",
+        "lemma": "ἄνθρωπος",
+        "morphology": "preposition with genitive plural",
+        "gloss": "among/from human beings"
+      },
+      {
+        "ref": "1.1.0",
+        "greek": "τῷ χρόνῳ",
+        "lemma": "χρόνος",
+        "morphology": "dative singular masculine",
+        "gloss": "by time"
+      },
+      {
+        "ref": "1.1.0",
+        "greek": "ἐξίτηλα γένηται",
+        "lemma": "ἐξίτηλος / γίγνομαι",
+        "morphology": "predicate adjective plus aorist subjunctive",
+        "gloss": "may become faded, erased"
+      },
+      {
+        "ref": "1.1.0",
+        "greek": "ἔργα μεγάλα τε καὶ θωμαστά",
+        "lemma": "ἔργον / μέγας / θωμαστός",
+        "morphology": "neuter plural noun phrase",
+        "gloss": "great and wondrous deeds"
+      },
+      {
+        "ref": "1.1.0",
+        "greek": "Ἕλλησι",
+        "lemma": "Ἕλλην",
+        "morphology": "dative plural masculine",
+        "gloss": "by Greeks"
+      },
+      {
+        "ref": "1.1.0",
+        "greek": "βαρβάροισι",
+        "lemma": "βάρβαρος",
+        "morphology": "dative plural masculine",
+        "gloss": "by non-Greeks, foreigners"
+      },
+      {
+        "ref": "1.1.0",
+        "greek": "ἀποδεχθέντα",
+        "lemma": "ἀποδείκνυμι",
+        "morphology": "aorist passive participle, neuter plural",
+        "gloss": "shown, displayed, performed"
+      },
+      {
+        "ref": "1.1.0",
+        "greek": "ἀκλεᾶ γένηται",
+        "lemma": "ἀκλεής / γίγνομαι",
+        "morphology": "predicate adjective plus aorist subjunctive",
+        "gloss": "may become without fame"
+      },
+      {
+        "ref": "1.1.0",
+        "greek": "διʼ ἣν αἰτίην",
+        "lemma": "αἰτίη",
+        "morphology": "preposition with accusative relative phrase",
+        "gloss": "for which cause"
+      },
+      {
+        "ref": "1.1.0",
+        "greek": "ἐπολέμησαν ἀλλήλοισι",
+        "lemma": "πολεμέω / ἀλλήλων",
+        "morphology": "aorist active indicative plus dative reciprocal",
+        "gloss": "they made war on one another"
+      },
+      {
+        "ref": "1.1.1",
+        "greek": "Περσέων οἱ λόγιοι",
+        "lemma": "Πέρσης / λόγιος",
+        "morphology": "genitive plural plus nominative plural adjective substantive",
+        "gloss": "the learned men of the Persians"
+      },
+      {
+        "ref": "1.1.1",
+        "greek": "Φοίνικας",
+        "lemma": "Φοῖνιξ",
+        "morphology": "accusative plural masculine",
+        "gloss": "Phoenicians"
+      },
+      {
+        "ref": "1.1.1",
+        "greek": "αἰτίους ... γενέσθαι",
+        "lemma": "αἴτιος / γίγνομαι",
+        "morphology": "accusative predicate adjective plus aorist infinitive",
+        "gloss": "to have become responsible"
+      },
+      {
+        "ref": "1.1.1",
+        "greek": "τῆς διαφορῆς",
+        "lemma": "διαφορά",
+        "morphology": "genitive singular feminine",
+        "gloss": "of the dispute, quarrel"
+      },
+      {
+        "ref": "1.1.1",
+        "greek": "ἀπὸ τῆς Ἐρυθρῆς καλεομένης θαλάσσης",
+        "lemma": "ἐρυθρός / θάλασσα",
+        "morphology": "prepositional phrase with genitive",
+        "gloss": "from the sea called Red"
+      },
+      {
+        "ref": "1.1.1",
+        "greek": "ἐπὶ τήνδε τὴν θάλασσαν",
+        "lemma": "θάλασσα",
+        "morphology": "preposition with accusative",
+        "gloss": "to this sea here"
+      },
+      {
+        "ref": "1.1.1",
+        "greek": "οἰκήσαντας τοῦτον τὸν χῶρον",
+        "lemma": "οἰκέω / χῶρος",
+        "morphology": "aorist participle plus accusative object",
+        "gloss": "having settled this region"
+      },
+      {
+        "ref": "1.1.1",
+        "greek": "ναυτιλίῃσι μακρῇσι ἐπιθέσθαι",
+        "lemma": "ναυτιλίη / ἐπιτίθημι",
+        "morphology": "dative plural plus aorist middle infinitive",
+        "gloss": "to set themselves to long sea voyages"
+      },
+      {
+        "ref": "1.1.1",
+        "greek": "ἀπαγινέοντας φορτία",
+        "lemma": "ἀπαγινέω / φορτίον",
+        "morphology": "present participle plus accusative plural",
+        "gloss": "carrying cargoes"
+      },
+      {
+        "ref": "1.1.1",
+        "greek": "Αἰγύπτιά τε καὶ Ἀσσύρια",
+        "lemma": "Αἰγύπτιος / Ἀσσύριος",
+        "morphology": "neuter plural adjectives",
+        "gloss": "Egyptian and Assyrian goods"
+      },
+      {
+        "ref": "1.1.1",
+        "greek": "τῇ τε ἄλλῃ ... καὶ ἐς Ἄργος",
+        "lemma": "ἄλλος / Ἄργος",
+        "morphology": "adverbial phrase plus prepositional phrase",
+        "gloss": "elsewhere and also to Argos"
+      },
+      {
+        "ref": "1.1.2",
+        "greek": "τὸ δὲ Ἄργος",
+        "lemma": "Ἄργος",
+        "morphology": "nominative singular neuter",
+        "gloss": "Argos"
+      },
+      {
+        "ref": "1.1.2",
+        "greek": "τοῦτον τὸν χρόνον",
+        "lemma": "χρόνος",
+        "morphology": "accusative of time",
+        "gloss": "at that time"
+      },
+      {
+        "ref": "1.1.2",
+        "greek": "προεῖχε",
+        "lemma": "προέχω",
+        "morphology": "imperfect active indicative third singular",
+        "gloss": "was preeminent, held first place"
+      },
+      {
+        "ref": "1.1.2",
+        "greek": "τῇ νῦν Ἑλλάδι καλεομένῃ χωρῇ",
+        "lemma": "Ἑλλάς / καλέω / χώρα",
+        "morphology": "dative singular phrase",
+        "gloss": "in the land now called Hellas"
+      },
+      {
+        "ref": "1.1.2",
+        "greek": "διατίθεσθαι τὸν φόρτον",
+        "lemma": "διατίθημι / φόρτος",
+        "morphology": "present middle infinitive plus accusative object",
+        "gloss": "to set out, dispose of, sell the cargo"
+      },
+      {
+        "ref": "1.1.3",
+        "greek": "πέμπτῃ δὲ ἢ ἕκτῃ ἡμέρῃ",
+        "lemma": "πέμπτος / ἕκτος / ἡμέρη",
+        "morphology": "dative of time",
+        "gloss": "on the fifth or sixth day"
+      },
+      {
+        "ref": "1.1.3",
+        "greek": "ἐξεμπολημένων σφι σχεδόν πάντων",
+        "lemma": "ἐξεμπολάω",
+        "morphology": "genitive absolute with perfect/passive participle",
+        "gloss": "when almost everything had been sold by them"
+      },
+      {
+        "ref": "1.1.3",
+        "greek": "ἐλθεῖν ἐπὶ τὴν θάλασσαν",
+        "lemma": "ἔρχομαι / θάλασσα",
+        "morphology": "aorist infinitive plus prepositional phrase",
+        "gloss": "to come down to the sea"
+      },
+      {
+        "ref": "1.1.3",
+        "greek": "γυναῖκας ἄλλας τε πολλάς",
+        "lemma": "γυνή / πολύς",
+        "morphology": "accusative plural phrase",
+        "gloss": "many other women"
+      },
+      {
+        "ref": "1.1.3",
+        "greek": "τοῦ βασιλέος θυγατέρα",
+        "lemma": "βασιλεύς / θυγάτηρ",
+        "morphology": "genitive plus accusative singular",
+        "gloss": "the king's daughter"
+      },
+      {
+        "ref": "1.1.3",
+        "greek": "κατὰ τὠυτὸ τὸ καὶ Ἕλληνές λέγουσι",
+        "lemma": "αὐτός / λέγω",
+        "morphology": "idiomatic comparative/reporting phrase",
+        "gloss": "according to the same account the Greeks also give"
+      },
+      {
+        "ref": "1.1.3",
+        "greek": "Ἰοῦν τὴν Ἰνάχου",
+        "lemma": "Ἰώ / Ἴναχος",
+        "morphology": "accusative name plus genitive patronymic",
+        "gloss": "Io daughter of Inachus"
+      },
+      {
+        "ref": "1.1.4",
+        "greek": "ταύτας στάσας",
+        "lemma": "οὗτος / ἵστημι",
+        "morphology": "accusative plural demonstrative plus aorist participle",
+        "gloss": "these women standing"
+      },
+      {
+        "ref": "1.1.4",
+        "greek": "κατά πρύμνην τῆς νεὸς",
+        "lemma": "πρύμνα / ναῦς",
+        "morphology": "preposition with accusative plus genitive",
+        "gloss": "by the stern of the ship"
+      },
+      {
+        "ref": "1.1.4",
+        "greek": "ὠνέεσθαι τῶν φορτίων",
+        "lemma": "ὠνέομαι / φορτίον",
+        "morphology": "present middle infinitive plus partitive genitive",
+        "gloss": "to buy some of the wares"
+      },
+      {
+        "ref": "1.1.4",
+        "greek": "τῶν σφι ἦν θυμός μάλιστα",
+        "lemma": "θυμός",
+        "morphology": "relative phrase with dative pronoun",
+        "gloss": "for which their desire was greatest"
+      },
+      {
+        "ref": "1.1.4",
+        "greek": "διακελευσαμένους",
+        "lemma": "διακελεύομαι",
+        "morphology": "aorist middle participle, accusative plural",
+        "gloss": "having urged one another on, having given the signal"
+      },
+      {
+        "ref": "1.1.4",
+        "greek": "ὁρμῆσαι ἐπʼ αὐτάς",
+        "lemma": "ὁρμάω",
+        "morphology": "aorist active infinitive plus prepositional phrase",
+        "gloss": "to rush upon them"
+      },
+      {
+        "ref": "1.1.4",
+        "greek": "τὰς μὲν ... πλεῦνας ... ἀποφυγεῖν",
+        "lemma": "πολύς / ἀποφεύγω",
+        "morphology": "accusative plural subject of infinitive",
+        "gloss": "most of the women escaped"
+      },
+      {
+        "ref": "1.1.4",
+        "greek": "τὴν δὲ Ἰοῦν σὺν ἄλλῃσι ἁρπασθῆναι",
+        "lemma": "Ἰώ / ἁρπάζω",
+        "morphology": "accusative subject plus aorist passive infinitive",
+        "gloss": "Io, with others, was seized"
+      },
+      {
+        "ref": "1.1.4",
+        "greek": "ἐσβαλομένους δὲ ἐς τὴν νέα",
+        "lemma": "ἐσβάλλω / ναῦς",
+        "morphology": "aorist middle participle plus prepositional phrase",
+        "gloss": "having put them into the ship"
+      },
+      {
+        "ref": "1.1.4",
+        "greek": "ἀποπλέοντας ἐπʼ Αἰγύπτου",
+        "lemma": "ἀποπλέω / Αἴγυπτος",
+        "morphology": "present participle plus prepositional phrase",
+        "gloss": "sailing away toward Egypt"
+      }
+    ],
+    "illustrationPromptSeed": {
+      "style": "Ionian field notebook: reed-pen linework, sea-weathered blues, red-figure silhouette accents, clear map labels, consistent traveler-narrator presence.",
+      "continuityNotes": [
+        "Keep Herodotus as a recurring traveler-recorder: bearded Ionian Greek, plain mantle, wax tablets or papyrus roll, observational rather than heroic pose.",
+        "Use the same sea-weathered blue wash and red-figure accents planned for the world-classics-seed Herodotus sequence.",
+        "Treat Io and the Phoenician traders as early mythic-history figures, not fantasy characters; avoid anachronistic ships, clothing, or weapons."
+      ],
+      "prompt": "Herodotus opens his inquiry as a field notebook spread: on one side, an Ionian recorder from Halicarnassus writes beside a labeled map of the Aegean and eastern Mediterranean; on the other, Phoenician traders at Argos display Egyptian and Assyrian cargo near a ship stern as Io and other women approach. Reed-pen linework, sea-blue washes, restrained red-figure silhouettes, clear labels for Halicarnassus, Argos, Phoenicia, Egypt, and the sea routes; documentary tone, no modern objects, no fantasy effects."
+    },
+    "uncertainties": [
+      "`ἱστορίης ἀπόδεξις` is programmatic: `presentation of inquiry`, `display of research`, and `publication of investigation` are all possible. The reader translation uses `sets out his inquiry` for fluency.",
+      "`βαρβάροισι` means non-Greek speakers or foreigners in this context. `Non-Greeks` was used in the reader translation to avoid an unnecessary modern pejorative tone.",
+      "`τῆς Ἐρυθρῆς ... θαλάσσης` is literally the Red Sea, but Herodotus can use the term broadly for waters beyond the Near East, including the Persian Gulf or Indian Ocean region.",
+      "`τήνδε τὴν θάλασσαν` is literally `this sea here`; the reader translation interprets it as the Mediterranean from the narrator's geographical frame.",
+      "`λόγιοι` is rendered as `learned men` and `authorities`; it means people versed in accounts, not necessarily official historians.",
+      "The infinitives in 1.1.1-1.1.4 continue the indirect discourse governed by `φασί`; these events are presented as the Persian version of the quarrel.",
+      "`διακελευσαμένους` may mean the Phoenicians urged one another on or gave one another a signal. The reader translation chooses `gave one another the word`.",
+      "The snapped end at 1.1.4 slightly exceeds the planned 0.1% by normalized character count, but it is the nearest natural section boundary."
+    ],
+    "reviewNotes": [
+      "Fetched the public Perseus TEI from the chunk sourceLocator rawUrl and verified the opening sections against CTS refs 1.1.0-1.1.4.",
+      "Boundary audit: normalized TEI text length was 1,171,855 characters; 0.1% target was 1,171.855 characters. The boundary after 1.1.4 at 1,249 characters was closer than the boundary after 1.1.3 at 972 characters.",
+      "This replaces a prior too-short kickoff artifact that covered only 1.1.0. No other chunk output files were modified.",
+      "The exact next-chunk start should be reviewed so herodotus-histories-0002 begins after 1.1.4 and does not duplicate Io's seizure."
+    ],
+    "modelRoute": {
+      "primary": "Claude Code CLI account-auth route: claude --print --tools \"\" --permission-mode dontAsk --no-session-persistence --max-budget-usd 0.50, version 2.1.202, with prompt piped from a public Perseus TEI extraction.",
+      "codex": "Codex CLI account-auth route was checked: codex-cli 0.142.5. A read-only codex exec translation attempt was made but stopped before generation because the account was usage-limited.",
+      "assembly": "Final JSON assembled in the active Codex workspace session from the fetched public source and account-auth CLI translation pass; no API-key SDK calls were used."
+    }
+  }
+}
