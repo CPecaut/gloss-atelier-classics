@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "id": "world-classics-seed",
+  "title": "World Classics Seed",
+  "createdAt": "2026-07-07T07:54:29.993Z",
+  "owner": "@coordinator",
+  "sourceIds": [
+    "herodotus-histories",
+    "shahnameh",
+    "ovid-metamorphoses",
+    "romance-three-kingdoms"
+  ],
+  "chunkPercent": 0.1,
+  "chunkCount": 4000,
+  "stages": [
+    "translation",
+    "gloss",
+    "illustration",
+    "review"
+  ],
+  "concurrency": {
+    "startingLimit": 4,
+    "currentLimitFile": "runtime/concurrency.json",
+    "acceleration": "When review quality is stable, run `npm run concurrency -- --set world-classics-seed --multiply 10`. When account limits or quality failures hit, run with `--reset`."
+  },
+  "sourcePolicy": "Each planned chunk covers 0.01% to 0.1% of a source work. Workers may snap boundaries to the nearest book, chapter, paragraph, line, couplet, or scene boundary during generation, but the manifest retains percentage coverage for coordination.",
+  "paths": {
+    "chunks": "chunks.jsonl",
+    "claims": "claims/",
+    "outputs": "outputs/",
+    "reviews": "reviews/"
+  }
+}

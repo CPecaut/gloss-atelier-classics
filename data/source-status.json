@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "checkedAt": "2026-07-07T07:55:44.022Z",
+  "sources": [
+    {
+      "id": "herodotus-histories",
+      "title": "Histories",
+      "checkedAt": "2026-07-07T07:55:44.022Z",
+      "ok": true,
+      "probes": [
+        {
+          "url": "https://scaife.perseus.org/library/urn:cts:greekLit:tlg0016/",
+          "ok": true,
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "contentLength": "3197",
+          "transport": "fetch",
+          "elapsedMs": 1221
+        },
+        {
+          "url": "https://raw.githubusercontent.com/PerseusDL/canonical-greekLit/master/data/tlg0016/tlg001/tlg0016.tlg001.perseus-grc2.xml",
+          "ok": true,
+          "status": 200,
+          "contentType": "text/plain; charset=utf-8",
+          "contentLength": "661930",
+          "transport": "fetch",
+          "elapsedMs": 90
+        },
+        {
+          "url": "https://github.com/PerseusDL/canonical-greekLit",
+          "ok": true,
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "contentLength": null,
+          "transport": "fetch",
+          "elapsedMs": 731
+        }
+      ]
+    },
+    {
+      "id": "shahnameh",
+      "title": "Shahnameh",
+      "checkedAt": "2026-07-07T07:55:44.022Z",
+      "ok": true,
+      "probes": [
+        {
+          "url": "https://ganjoor.net/ferdousi/shahname",
+          "ok": true,
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "contentLength": null,
+          "transport": "fetch",
+          "elapsedMs": 811
+        },
+        {
+          "url": "https://github.com/ganjoor",
+          "ok": true,
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "contentLength": null,
+          "transport": "fetch",
+          "elapsedMs": 768
+        }
+      ]
+    },
+    {
+      "id": "ovid-metamorphoses",
+      "title": "Metamorphoses",
+      "checkedAt": "2026-07-07T07:55:44.022Z",
+      "ok": true,
+      "probes": [
+        {
+          "url": "https://scaife.perseus.org/library/urn:cts:latinLit:phi0959.phi006/",
+          "ok": true,
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "contentLength": "3272",
+          "transport": "fetch",
+          "elapsedMs": 817
+        },
+        {
+          "url": "https://raw.githubusercontent.com/PerseusDL/canonical-latinLit/master/data/phi0959/phi006/phi0959.phi006.perseus-lat2.xml",
+          "ok": true,
+          "status": 200,
+          "contentType": "text/plain; charset=utf-8",
+          "contentLength": "298916",
+          "transport": "fetch",
+          "elapsedMs": 85
+        },
+        {
+          "url": "https://github.com/PerseusDL/canonical-latinLit",
+          "ok": true,
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "contentLength": null,
+          "transport": "fetch",
+          "elapsedMs": 801
+        }
+      ]
+    },
+    {
+      "id": "romance-three-kingdoms",
+      "title": "Romance of the Three Kingdoms",
+      "checkedAt": "2026-07-07T07:55:44.022Z",
+      "ok": true,
+      "probes": [
+        {
+          "url": "https://www.gutenberg.org/ebooks/23950",
+          "ok": true,
+          "status": 200,
+          "contentType": "text/html;charset=utf-8",
+          "contentLength": "22222",
+          "transport": "curl",
+          "elapsedMs": 1834
+        },
+        {
+          "url": "https://www.gutenberg.org/files/23950/23950-0.txt",
+          "ok": true,
+          "status": 200,
+          "contentType": "text/plain; charset=utf-8",
+          "contentLength": "1863588",
+          "transport": "curl",
+          "elapsedMs": 1204
+        },
+        {
+          "url": "https://ctext.org/sanguo-yanyi",
+          "ok": true,
+          "status": 200,
+          "contentType": "text/html; charset=utf-8",
+          "contentLength": null,
+          "transport": "fetch",
+          "elapsedMs": 318
+        }
+      ]
+    }
+  ]
+}

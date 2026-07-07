@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">Classical source script mosaic</title>
+  <desc id="desc">A quiet reference strip using Greek, Persian, Latin, and Chinese scripts.</desc>
+  <rect width="1200" height="360" fill="#10141a"/>
+  <rect x="28" y="28" width="264" height="304" fill="#171d24" stroke="#34404d"/>
+  <rect x="326" y="28" width="264" height="304" fill="#171d24" stroke="#34404d"/>
+  <rect x="624" y="28" width="264" height="304" fill="#171d24" stroke="#34404d"/>
+  <rect x="922" y="28" width="250" height="304" fill="#171d24" stroke="#34404d"/>
+  <g fill="#f3ecdf" font-family="Georgia, 'Times New Roman', serif">
+    <text x="56" y="80" font-size="26">Ἡροδότου ἱστορίαι</text>
+    <text x="56" y="128" font-size="20">λόγος · πόλις · θάλασσα</text>
+    <text x="56" y="176" font-size="20">βασιλεύς · χρηστήριον</text>
+    <text x="56" y="224" font-size="20">στρατός · νόμος</text>
+    <text x="458" y="84" font-size="25" text-anchor="middle">شاهنامهٔ فردوسی</text>
+    <text x="458" y="134" font-size="20" text-anchor="middle">رستم · سهراب · زال</text>
+    <text x="458" y="184" font-size="20" text-anchor="middle">فرّ · شاه · نبرد</text>
+    <text x="652" y="82" font-size="26">In nova fert animus</text>
+    <text x="652" y="130" font-size="20">mutatas dicere formas</text>
+    <text x="652" y="178" font-size="20">corpora · numina · silvae</text>
+    <text x="652" y="226" font-size="20">aether · tellus · unda</text>
+    <text x="950" y="82" font-size="28">三國演義</text>
+    <text x="950" y="132" font-size="22">桃園結義</text>
+    <text x="950" y="182" font-size="22">兵法 · 朝廷 · 義</text>
+    <text x="950" y="232" font-size="22">英雄 · 亂世</text>
+  </g>
+  <g fill="none" stroke-width="4">
+    <path d="M54 290 C100 255 160 325 242 284" stroke="#e36f66"/>
+    <path d="M360 286 C410 250 476 320 548 282" stroke="#55c6ad"/>
+    <path d="M650 286 C704 250 780 320 852 278" stroke="#d99a5b"/>
+    <path d="M950 286 C1000 250 1082 320 1146 278" stroke="#82aeea"/>
+  </g>
+</svg>

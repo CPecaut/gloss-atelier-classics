@@ -1,0 +1,28 @@
+{
+  "name": "gloss-atelier",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "description": "GitHub-native tracker for collaborative gloss-annotated classical translation and illustration sets.",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "sources:check": "node scripts/locate-sources.mjs",
+    "set:new": "node scripts/new-set.mjs",
+    "claim": "node scripts/claim.mjs",
+    "complete": "node scripts/complete.mjs",
+    "concurrency": "node scripts/set-concurrency.mjs",
+    "validate": "node scripts/validate.mjs"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.4.1",
+    "vite": "^6.3.5",
+    "typescript": "^5.5.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "lucide-react": "^0.468.0"
+  },
+  "devDependencies": {}
+}
+

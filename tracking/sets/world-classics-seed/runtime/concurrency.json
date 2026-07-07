@@ -1,0 +1,7 @@
+{
+  "setId": "world-classics-seed",
+  "currentLimit": 4,
+  "baselineLimit": 4,
+  "updatedAt": "2026-07-07T07:56:53.740Z",
+  "reason": "reset to baseline after limit exhaustion or review stop"
+}

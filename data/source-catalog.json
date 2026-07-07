@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "updated": "2026-07-07",
+  "chunkPolicy": {
+    "minPercent": 0.01,
+    "maxPercent": 0.1,
+    "defaultPercent": 0.1,
+    "description": "Each planned chunk covers 0.01% to 0.1% of a source work. Workers may snap boundaries to the nearest book, chapter, paragraph, line, couplet, or scene boundary during generation, but the manifest retains percentage coverage for coordination."
+  },
+  "sources": [
+    {
+      "id": "herodotus-histories",
+      "title": "Histories",
+      "originalTitle": "Ἱστορίαι",
+      "author": "Herodotus",
+      "language": "Ancient Greek",
+      "period": "5th century BCE",
+      "sourceFamily": "Perseus / Scaife CTS",
+      "rightsNote": "Ancient Greek original is public domain; Perseus TEI repository is CC BY-SA 4.0. Keep attribution with derived text data.",
+      "primaryUrl": "https://scaife.perseus.org/library/urn:cts:greekLit:tlg0016/",
+      "rawUrl": "https://raw.githubusercontent.com/PerseusDL/canonical-greekLit/master/data/tlg0016/tlg001/tlg0016.tlg001.perseus-grc2.xml",
+      "sourceRefs": {
+        "ctsUrn": "urn:cts:greekLit:tlg0016.tlg001.perseus-grc2",
+        "repository": "https://github.com/PerseusDL/canonical-greekLit",
+        "unitPattern": "book.chapter.section"
+      },
+      "starterAesthetic": "Ionian field notebook: reed-pen linework, sea-weathered blues, red-figure silhouette accents, clear map labels, consistent traveler-narrator presence.",
+      "promptFocus": ["travel", "ethnography", "imperial courts", "oracles", "battle geography"]
+    },
+    {
+      "id": "shahnameh",
+      "title": "Shahnameh",
+      "originalTitle": "شاهنامه",
+      "author": "Ferdowsi",
+      "language": "Classical Persian",
+      "period": "c. 977-1010 CE",
+      "sourceFamily": "Ganjoor",
+      "rightsNote": "Persian original is public domain; Ganjoor describes its database as public domain/open source. Keep Ganjoor attribution with fetched text.",
+      "primaryUrl": "https://ganjoor.net/ferdousi/shahname",
+      "rawUrl": "https://ganjoor.net/ferdousi/shahname",
+      "sourceRefs": {
+        "repository": "https://github.com/ganjoor",
+        "unitPattern": "king/reign/story/couplet",
+        "openDataNote": "https://en.ganjoor.net/introduction/"
+      },
+      "starterAesthetic": "Persian epic manuscript workshop: mineral pigments, gold leaf geometry, expressive horses, consistent heroic costumes, high-contrast margin ornaments.",
+      "promptFocus": ["kingship", "mythic beasts", "court scenes", "heroic combat", "genealogies"]
+    },
+    {
+      "id": "ovid-metamorphoses",
+      "title": "Metamorphoses",
+      "originalTitle": "Metamorphoses",
+      "author": "Publius Ovidius Naso",
+      "language": "Latin",
+      "period": "c. 8 CE",
+      "sourceFamily": "Perseus / Scaife CTS",
+      "rightsNote": "Latin original is public domain; Perseus TEI repository is CC BY-SA 4.0. Keep attribution with derived text data.",
+      "primaryUrl": "https://scaife.perseus.org/library/urn:cts:latinLit:phi0959.phi006/",
+      "rawUrl": "https://raw.githubusercontent.com/PerseusDL/canonical-latinLit/master/data/phi0959/phi006/phi0959.phi006.perseus-lat2.xml",
+      "sourceRefs": {
+        "ctsUrn": "urn:cts:latinLit:phi0959.phi006.perseus-lat2",
+        "repository": "https://github.com/PerseusDL/canonical-latinLit",
+        "unitPattern": "book.line"
+      },
+      "starterAesthetic": "Roman fresco sequence: restrained Pompeian palette, elegant contour figures, metamorphosis shown mid-transition, recurring gold-caption cartouches.",
+      "promptFocus": ["transformation", "mythic bodies", "gods", "landscape causes", "line-number continuity"]
+    },
+    {
+      "id": "romance-three-kingdoms",
+      "title": "Romance of the Three Kingdoms",
+      "originalTitle": "三國演義",
+      "author": "Luo Guanzhong",
+      "language": "Classical / vernacular literary Chinese",
+      "period": "14th century CE",
+      "sourceFamily": "Project Gutenberg + Chinese Text Project",
+      "rightsNote": "Project Gutenberg record identifies the text as public domain in the USA. CText provides an open-access browsable reference.",
+      "primaryUrl": "https://www.gutenberg.org/ebooks/23950",
+      "rawUrl": "https://www.gutenberg.org/files/23950/23950-0.txt",
+      "sourceRefs": {
+        "ctext": "https://ctext.org/sanguo-yanyi",
+        "unitPattern": "chapter/paragraph",
+        "gutenbergId": "23950"
+      },
+      "starterAesthetic": "Ming woodblock serial: bold black contour, muted cinnabar and pine green, recurring armor silhouettes, readable campaign maps, theatrical chapter-title staging.",
+      "promptFocus": ["oaths", "strategy", "court intrigue", "battle formations", "named-character continuity"]
+    }
+  ]
+}
+
