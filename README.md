@@ -1,6 +1,10 @@
 # Gloss Atelier
 
-GitHub-native tracking for collaborative generation of gloss-annotated translations and illustration prompts from public classical source texts.
+**🌍 Public site:** [https://speakreading.com/library](https://speakreading.com/library)
+
+GitHub-native tracking for collaborative generation of gloss-annotated translations and illustrations from public classical source texts.
+
+The public viewer features a horizontal gallery of recent illustrations and interactive bilingual reader modules (with auto-play).
 
 The seed set starts with:
 
@@ -18,29 +22,13 @@ npm install
 npm run dev
 ```
 
-The default view is the **public World Library viewer** (for speakreading.com/worldlibrary). It tracks progress and lets anyone browse published outputs (source + literal/reader translations + gloss tables + illustration seeds).
+The default view when running locally (`npm run dev`) is the **public Library viewer**. It shows a gallery of recent illustrations, published outputs (source + literal/reader translations + glosses), and interactive bilingual modules (images + auto-play).
 
-The original production controls are available via the "Production Atelier" link in the header.
+The original production controls ("Atelier" mode) are available via the link in the header.
 
 Open the local URL printed by Vite.
 
-Build the static public site:
-
-```bash
-npm run worldlibrary:build
-```
-
-Publish it into the local SpeakReading static tree:
-
-```bash
-npm run worldlibrary:publish-local
-```
-
-Deploy it to `https://speakreading.com/worldlibrary/`:
-
-```bash
-npm run worldlibrary:deploy
-```
+Live site: https://speakreading.com/library/
 
 Validate data and source locators:
 
@@ -49,17 +37,20 @@ npm run sources:check
 npm run validate
 ```
 
-Claim work (then run with grok/claude/codex):
+Claim work (Grok is recommended):
 
 ```bash
-npm run claim -- --set world-classics-seed --stage illustration --count 4 --owner @you
-# grok example for execution (use --effort max for translation):
+npm run claim -- --set world-classics-seed --stage translation --count 1 --owner @you
+
+# Run with max effort for translation:
 grok --prompt-file tracking/sets/world-classics-seed/claims/translation/<claim>.prompt.md --output-format json --effort max
-# for illustration/image:
+
+# For illustration (after claiming the stage):
 grok --prompt-file tracking/sets/world-classics-seed/claims/illustration/<claim>.prompt.md --output-format json
+# Inside Grok, use `/imagine <prompt>` to generate the image.
 ```
 
-For image generation in illustration stage, include `/imagine <refined prompt>` in the grok interaction.
+Use `--effort max` for translation work. Images go into `tracking/sets/.../incoming/` (gitignored).
 
 Scale a stable run:
 
@@ -71,6 +62,8 @@ npm run concurrency -- --set world-classics-seed --reset
 ## Current Seed
 
 `tracking/sets/world-classics-seed` contains 4,000 planned chunks: 1,000 chunks per source, each covering 0.1% of its work.
+
+The public site displays completed translations, glosses, and generated illustrations (horizontal gallery + bilingual viewer modules with auto-play).
 
 For smaller chunks, create a new set:
 

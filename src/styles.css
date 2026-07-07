@@ -1119,3 +1119,220 @@ tbody tr:hover,
   padding: 20px;
   color: var(--muted);
 }
+
+/* Bilingual Viewer Module (image + literal under it, playable) */
+.bilingual-module {
+  margin-top: 16px;
+}
+
+.module-image {
+  margin-bottom: 12px;
+}
+
+.module-image img {
+  width: 100%;
+  max-height: 420px;
+  object-fit: contain;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #111820;
+}
+
+/* Prominent current bilingual right under the picture */
+.current-bilingual {
+  margin: 12px 0;
+  padding: 14px 16px;
+  background: var(--panel);
+  border: 1px solid var(--teal);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.current-bilingual .greek {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.35;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.current-bilingual .literal {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.45;
+  padding-left: 8px;
+  border-left: 3px solid var(--teal);
+}
+
+.bilingual-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bilingual-header h4 {
+  margin: 0;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted-2);
+}
+
+.play-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.play-controls button {
+  font-size: 13px;
+  padding: 4px 10px;
+  min-height: 28px;
+  border: 1px solid var(--border);
+  background: var(--panel-2);
+  color: var(--text);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.play-controls button:hover {
+  background: #31445b;
+}
+
+.play-btn {
+  font-weight: 600;
+}
+
+.progress {
+  font-size: 12px;
+  color: var(--muted);
+  padding: 0 6px;
+}
+
+.bilingual-pairs {
+  border: 1px solid var(--border);
+  background: var(--sunken);
+  border-radius: 6px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.bilingual-pair {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-soft);
+  cursor: pointer;
+  transition: background 0.1s ease;
+}
+
+.bilingual-pair:last-child {
+  border-bottom: none;
+}
+
+.bilingual-pair:hover {
+  background: #1f2732;
+}
+
+.bilingual-pair.current {
+  background: rgba(85, 198, 173, 0.12);
+  border-left: 3px solid var(--teal);
+  padding-left: 11px;
+}
+
+.bilingual-pair .greek {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 15px;
+  line-height: 1.35;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+
+.bilingual-pair .literal {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.module-meta {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--muted-2);
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Horizontal scrolling gallery for recent illustrations */
+.recent-gallery {
+  margin: 12px 0 20px;
+}
+
+.gallery-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.gallery-head h3 {
+  font-size: 15px;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted-2);
+}
+
+.gallery-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 4px 2px 12px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gallery-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.gallery-scroll::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+.gallery-item {
+  flex: 0 0 220px;
+  min-width: 220px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  scroll-snap-align: start;
+  transition: transform 0.1s ease, border-color 0.1s ease;
+}
+
+.gallery-item:hover {
+  border-color: var(--teal);
+  transform: translateY(-1px);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-label {
+  padding: 8px 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: var(--panel-2);
+}

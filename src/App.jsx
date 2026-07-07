@@ -20,7 +20,9 @@ import sourceStatus from "../data/source-status.json";
 import outputsIndex from "../data/outputs-index.json";
 import manifest from "../tracking/sets/world-classics-seed/manifest.json";
 import sampleTranslation from "../tracking/sets/world-classics-seed/outputs/translation/herodotus-histories-0001.json";
-import { useEffect, useMemo, useState } from "react";
+import sampleIllustration from "../tracking/sets/world-classics-seed/outputs/illustration/herodotus-histories-0001.json";
+import herodotusIllustration from "../tracking/sets/world-classics-seed/incoming/herodotus-histories-0001-illustration.jpg";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const stages = ["translation", "gloss", "illustration", "review"];
 
@@ -282,7 +284,10 @@ function ChunkList({ chunks, completed, onSelectChunk, selectedId }) {
       </div>
       <div className="chunk-list">
         {filtered.map((c) => {
-          const isDone = completed.translation?.has(c.id);
+          const hasTrans = completed.translation?.has(c.id);
+          const hasIllus = completed.illustration?.has(c.id);
+          const isDone = hasTrans || hasIllus;
+          const statusText = hasTrans && hasIllus ? "ready" : hasIllus ? "illust." : hasTrans ? "ready" : "open";
           return (
             <button
               key={c.id}
@@ -291,7 +296,7 @@ function ChunkList({ chunks, completed, onSelectChunk, selectedId }) {
             >
               <span className="cid">{c.id}</span>
               <span className="cov">{formatCoverage(c.coverage)}</span>
-              <span className={`cstatus ${isDone ? "done" : "open"}`}>{isDone ? "ready" : "open"}</span>
+              <span className={`cstatus ${isDone ? "done" : "open"}`}>{statusText}</span>
             </button>
           );
         })}
@@ -481,9 +486,29 @@ function App() {
   const BASE_URL = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) ? import.meta.env.BASE_URL : '/';
   const asset = (p) => `${BASE_URL}${p}`.replace(/\/+/g, '/');
   const completed = useMemo(() => getCompletedForSet(manifest.id), []);
+  const recentIllustrations = useMemo(() => {
+    const items = [];
+    if (completed.illustration?.has("herodotus-histories-0001")) {
+      items.push({
+        id: "herodotus-histories-0001",
+        title: "Herodotus • Histories 1.1",
+        image: herodotusIllustration,
+      });
+    }
+    // TODO: dynamically discover more from outputs-index + illustration outputs
+    return items;
+  }, [completed]);
   const [selectedWork, setSelectedWork] = useState(null);
   const [viewedChunk, setViewedChunk] = useState(null);
   const [viewedOutput, setViewedOutput] = useState(null);
+  const [viewedIllustration, setViewedIllustration] = useState(null);
+  const illustrationRef = useRef(null);
+  const [shouldScrollToIllustration, setShouldScrollToIllustration] = useState(false);
+
+  // Bilingual viewer state for illustration click view
+  const [bilingualIndex, setBilingualIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
+
   const [loadedChunks, setLoadedChunks] = useState([
     // Minimal seeds so lists are usable immediately; full file loads async
     {"id":"herodotus-histories-0001","setId":"world-classics-seed","sourceId":"herodotus-histories","coverage":{"startPercent":0,"endPercent":0.1,"chunkPercent":0.1}},
@@ -523,17 +548,48 @@ function App() {
     return () => { cancelled = true; };
   }, [mode]);
 
+  useEffect(() => {
+    if (shouldScrollToIllustration && illustrationRef.current) {
+      illustrationRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setShouldScrollToIllustration(false);
+    }
+  }, [shouldScrollToIllustration, viewedIllustration]);
+
   const sourceChunks = useMemo(() => {
     if (!selectedWork) return [];
     return loadedChunks.filter((c) => c.sourceId === selectedWork.id);
   }, [selectedWork, loadedChunks]);
 
-  const openWork = (source) => {
+  // Bilingual pairs from the translation data (Greek + literal) for the illustration module
+  const bilingualPairs = useMemo(() => {
+    if (!viewedIllustration || viewedChunk?.id !== "herodotus-histories-0001") return [];
+    const art = sampleTranslation.artifact || {};
+    const sources = art.sourceExcerptReferences || [];
+    const literals = art.literalTranslations || [];
+    return sources.map((src, i) => ({
+      ref: src.ref,
+      greek: src.greek,
+      literal: literals[i]?.translation || ''
+    }));
+  }, [viewedIllustration, viewedChunk]);
+
+  // Auto-play for the bilingual viewer
+  useEffect(() => {
+    let timer;
+    if (isAutoPlaying && bilingualPairs.length > 0) {
+      timer = setInterval(() => {
+        setBilingualIndex(prev => (prev + 1) % bilingualPairs.length);
+      }, 2200); // ~2.2s per section
+    }
+    return () => clearInterval(timer);
+  }, [isAutoPlaying, bilingualPairs.length]);
+
+  const openWork = (source, scrollToIllustration = false) => {
     setSelectedWork(source);
     setViewedChunk(null);
     setViewedOutput(null);
     // auto-open the sample if available for herodotus
-    if (source.id === "herodotus-histories" && completed.translation?.has("herodotus-histories-0001")) {
+    if (source.id === "herodotus-histories" && (completed.translation?.has("herodotus-histories-0001") || completed.illustration?.has("herodotus-histories-0001"))) {
       // The chunk metadata will come from loadedChunks on next render; seed a minimal one for immediate view
       const minimalChunk = {
         id: "herodotus-histories-0001",
@@ -542,6 +598,12 @@ function App() {
       };
       setViewedChunk(minimalChunk);
       setViewedOutput(sampleTranslation);
+      setViewedIllustration(sampleIllustration);
+      setBilingualIndex(0);
+      setIsAutoPlaying(false);
+      if (scrollToIllustration) {
+        setShouldScrollToIllustration(true);
+      }
     }
   };
 
@@ -550,8 +612,14 @@ function App() {
     // For now only the known sample has real output; future: dynamic load or pre-bundled
     if (chunk.id === "herodotus-histories-0001") {
       setViewedOutput(sampleTranslation);
+      setViewedIllustration(sampleIllustration);
+      setBilingualIndex(0);
+      setIsAutoPlaying(false);
     } else {
-      setViewedOutput(null); // placeholder until more outputs exist
+      setViewedOutput(null);
+      setViewedIllustration(null);
+      setBilingualIndex(0);
+      setIsAutoPlaying(false);
     }
   };
 
@@ -559,6 +627,9 @@ function App() {
     setSelectedWork(null);
     setViewedChunk(null);
     setViewedOutput(null);
+    setViewedIllustration(null);
+    setBilingualIndex(0);
+    setIsAutoPlaying(false);
   };
 
   const totalCompleted = Object.values(completed).reduce((sum, set) => sum + set.size, 0);
@@ -578,6 +649,32 @@ function App() {
             <a href="https://speakreading.com" target="_blank" rel="noreferrer">speakreading.com <ExternalLink size={13} /></a>
           </div>
         </nav>
+
+        {recentIllustrations.length > 0 && (
+          <section className="recent-gallery">
+            <div className="gallery-head">
+              <h3>Recent Illustrations</h3>
+              <span className="muted">scroll horizontally →</span>
+            </div>
+            <div className="gallery-scroll">
+              {recentIllustrations.map((ill) => (
+                <div
+                  key={ill.id}
+                  className="gallery-item"
+                  onClick={() => {
+                    const her = catalog.sources.find((s) => s.id === "herodotus-histories");
+                    if (her) {
+                      openWork(her, true); // open and scroll to illustration
+                    }
+                  }}
+                >
+                  <img src={ill.image} alt={ill.title} />
+                  <div className="gallery-label">{ill.title}</div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         <header className="wl-hero">
           <div className="hero-content">
@@ -666,7 +763,7 @@ function App() {
                         <strong>{viewedChunk.id}</strong> · {formatCoverage(viewedChunk.coverage)}
                       </div>
                       <div className="viewed-actions">
-                        {viewedOutput ? <span className="ready-pill">output ready</span> : <span className="open-pill">in production</span>}
+                        {viewedOutput || viewedIllustration ? <span className="ready-pill">output ready</span> : <span className="open-pill">in production</span>}
                       </div>
                     </div>
 
@@ -678,12 +775,90 @@ function App() {
                         <p className="muted">Outputs appear here once submitted and accepted into the set.</p>
                       </div>
                     )}
+
+                    {viewedIllustration && (
+                      <div className="illustration-section bilingual-module" ref={illustrationRef} id="illustration">
+                        {/* Image at top */}
+                        <div className="module-image">
+                          <img
+                            src={herodotusIllustration}
+                            alt="Generated illustration for Herodotus Histories 1.1"
+                          />
+                        </div>
+
+                        {/* Bilingual viewer module: Greek + Literal under the picture */}
+                        <div className="bilingual-viewer">
+                          {/* Controls at top of the module */}
+                          <div className="bilingual-header">
+                            <h4>Bilingual Viewer</h4>
+                            <div className="play-controls">
+                              <button
+                                onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+                                className="play-btn"
+                              >
+                                {isAutoPlaying ? '⏸ Pause' : '▶ Play'}
+                              </button>
+                              <button
+                                onClick={() => {
+                                  setBilingualIndex(Math.max(0, bilingualIndex - 1));
+                                  setIsAutoPlaying(false);
+                                }}
+                              >
+                                ← Prev
+                              </button>
+                              <span className="progress">{bilingualIndex + 1} / {bilingualPairs.length}</span>
+                              <button
+                                onClick={() => {
+                                  setBilingualIndex(Math.min(bilingualPairs.length - 1, bilingualIndex + 1));
+                                  setIsAutoPlaying(false);
+                                }}
+                              >
+                                Next →
+                              </button>
+                              <button onClick={() => { setBilingualIndex(0); setIsAutoPlaying(false); }}>
+                                Reset
+                              </button>
+                            </div>
+                          </div>
+
+                          {/* The picture is above; here is the prominent current bilingual under it */}
+                          {bilingualPairs[bilingualIndex] && (
+                            <div className="current-bilingual">
+                              <div className="greek">{bilingualPairs[bilingualIndex].greek}</div>
+                              <div className="literal">{bilingualPairs[bilingualIndex].literal}</div>
+                            </div>
+                          )}
+
+                          {/* Scrollable list of all pairs to follow along */}
+                          <div className="bilingual-pairs">
+                            {bilingualPairs.map((pair, idx) => (
+                              <div
+                                key={idx}
+                                className={`bilingual-pair ${idx === bilingualIndex ? 'current' : ''}`}
+                                onClick={() => {
+                                  setBilingualIndex(idx);
+                                  setIsAutoPlaying(false);
+                                }}
+                              >
+                                <div className="greek">{pair.greek}</div>
+                                <div className="literal">{pair.literal}</div>
+                              </div>
+                            ))}
+                          </div>
+
+                          <div className="module-meta">
+                            <span>Illustration • Greek + Literal (bilingual)</span>
+                            <span className="muted">Play auto-advances • Click any line to jump</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
 
                 {!viewedChunk && (
                   <div className="empty-hint">
-                    Select a chunk from the list above to view its translation, gloss, and illustration prompt.
+                    Select a chunk from the list above to view its translation, gloss, illustration prompt, and generated image (when available).
                   </div>
                 )}
               </div>
