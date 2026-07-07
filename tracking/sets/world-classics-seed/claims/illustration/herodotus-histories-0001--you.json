@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "setId": "world-classics-seed",
+  "chunkId": "herodotus-histories-0001",
+  "sourceId": "herodotus-histories",
+  "stage": "illustration",
+  "owner": "@you",
+  "status": "submitted",
+  "claimedAt": "2026-07-07T08:41:06.794Z",
+  "expiresAt": "2026-07-08T08:41:06.795Z",
+  "branchHint": "work/world-classics-seed/illustration/herodotus-histories-0001-you",
+  "promptFile": "herodotus-histories-0001--you.prompt.md",
+  "submittedAt": "2026-07-07T08:42:44.593Z"
+}

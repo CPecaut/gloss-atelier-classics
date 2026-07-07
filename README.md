@@ -49,11 +49,17 @@ npm run sources:check
 npm run validate
 ```
 
-Claim work:
+Claim work (then run with grok/claude/codex):
 
 ```bash
 npm run claim -- --set world-classics-seed --stage illustration --count 4 --owner @you
+# grok example for execution (use --effort max for translation):
+grok --prompt-file tracking/sets/world-classics-seed/claims/translation/<claim>.prompt.md --output-format json --effort max
+# for illustration/image:
+grok --prompt-file tracking/sets/world-classics-seed/claims/illustration/<claim>.prompt.md --output-format json
 ```
+
+For image generation in illustration stage, include `/imagine <refined prompt>` in the grok interaction.
 
 Scale a stable run:
 

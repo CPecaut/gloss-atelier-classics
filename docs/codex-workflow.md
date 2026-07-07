@@ -24,10 +24,20 @@ The claim command writes:
 - `claims/<stage>/<chunk-id>--<owner>.json`
 - `claims/<stage>/<chunk-id>--<owner>.prompt.md`
 
-Use the prompt file with Codex:
+Use the prompt file with your chosen CLI (grok recommended):
 
 ```bash
+# Grok (use --effort max for translation parts)
+grok --prompt-file tracking/sets/world-classics-seed/claims/translation/<claim>.prompt.md --output-format json --effort max
+
+# for illustration (image gen via /imagine)
+grok --prompt-file tracking/sets/world-classics-seed/claims/illustration/<claim>.prompt.md --output-format json
+
+# Codex
 codex exec --cd "$PWD" "$(cat tracking/sets/world-classics-seed/claims/translation/<claim>.prompt.md)"
+
+# Claude
+claude --print "$(cat tracking/sets/world-classics-seed/claims/translation/<claim>.prompt.md)"
 ```
 
 ## Submit Output
@@ -45,14 +55,13 @@ Generated output files belong under `outputs/<stage>/<chunk-id>.json`.
 
 ## Illustration Review
 
-For each illustration chunk, submit:
+For each illustration chunk (use `grok` for /imagine image gen):
 
 - source boundary used
 - character continuity notes
-- final prompt
-- negative prompt or exclusions
-- model and command route
-- image references or accepted asset paths
+- final prompt (generated via Grok `/imagine` or equivalent)
+- image references or paths (store raw images under `tracking/sets/<set-id>/incoming/` if large; commit only refs/prompts)
+- model and command route (e.g. "grok --prompt-file ... ; /imagine ...")
 - reviewer status: `submitted`, `approved`, or `needs-revision`
 
 If a reviewer dislikes the aesthetic, mark the output `needs-revision`, add a review note, and claim the same chunk in `review` or `illustration` stage.

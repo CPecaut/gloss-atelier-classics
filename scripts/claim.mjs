@@ -55,8 +55,22 @@ function isActiveClaim(claim) {
   return claim.status === "active" && (!claim.expiresAt || Date.parse(claim.expiresAt) > Date.now());
 }
 
-function makeCodexPrompt({ manifest, chunks, stage }) {
+function makeStagePrompt({ manifest, chunks, stage }) {
   const lines = chunks.map((chunk) => `- ${chunk.id}: ${chunk.sourceTitle} ${chunk.coverage.startPercent}-${chunk.coverage.endPercent}%`);
+  const stageGuidance = stage === 'illustration' ? `
+For ILLUSTRATION stage:
+- Read the chunk's promptSeed (aesthetic + focus) and any prior outputs/translation/<chunk>.json 's illustrationPromptSeed.
+- Produce a refined, production-ready illustration prompt with strong character/style continuity.
+- Use Grok's /imagine capability (or the imagine skill) to actually generate the image from the final prompt.
+- In the output JSON artifact include: finalPrompt, imageRef (path to generated image or incoming/), continuityNotes, styleNotes, source refs.
+- Save generated images under tracking/sets/${manifest.id}/incoming/ (not committed directly).
+- Output a complete JSON matching previous stage artifacts.
+` : stage === 'translation' ? `
+For TRANSLATION stage:
+- Also emit illustrationPromptSeed (using chunk promptSeed) inside the artifact for later stages.
+- Produce high-quality literal + reader translations + detailed gloss table.
+` : '';
+
   return `You are working in the Gloss Atelier repo.
 
 Set: ${manifest.id}
@@ -69,9 +83,17 @@ For each chunk:
 2. Snap the percentage span to natural boundaries while preserving source order.
 3. Produce the requested ${stage} deliverable without overwriting other chunks.
 4. Save JSON output under tracking/sets/${manifest.id}/outputs/${stage}/<chunk-id>.json.
-5. Include source URL, source refs, model/command route, uncertainties, and review notes.
+5. Include source URL, source refs, model/command route (e.g. "grok --prompt-file ... ; /imagine"), uncertainties, and review notes.
 
-Use account-auth CLI routes only; do not use API-key SDK calls.`;
+${stageGuidance}
+
+Use account-auth CLI routes only; do not use API-key SDK calls.
+Prefer grok CLI for xAI-native translation and image generation (/imagine).
+Read chunk JSONs and prior stage outputs (e.g. translation for illustration) for continuity.
+
+When running the prompt yourself:
+- Translation: grok --prompt-file <this-file> --output-format json --effort max
+- Illustration: grok --prompt-file <this-file> --output-format json (then use /imagine in session)`;
 }
 
 async function main() {
@@ -117,7 +139,7 @@ async function main() {
 
   const claimDir = path.join(setDir, "claims", stage);
   await ensureDir(claimDir);
-  const prompt = makeCodexPrompt({ manifest, chunks: selected, stage });
+  const prompt = makeStagePrompt({ manifest, chunks: selected, stage });
   for (const chunk of selected) {
     await writeJson(path.join(claimDir, `${chunk.id}--${ownerSlug}.json`), {
       version: 1,
@@ -140,9 +162,18 @@ async function main() {
   console.log("\nPrompt file command(s):");
   for (const chunk of selected) {
     const promptPath = `tracking/sets/${setId}/claims/${stage}/${chunk.id}--${ownerSlug}.prompt.md`;
+    console.log(`# codex`);
     console.log(`codex exec --cd "$PWD" "$(cat ${promptPath})"`);
+    console.log(`# claude`);
+    console.log(`claude --print "$(cat ${promptPath})"`);
+    console.log(`# grok (recommended for xAI/Grok support)`);
+    let grokCmd = `grok --prompt-file ${promptPath} --output-format json`;
+    if (stage === 'translation') {
+      grokCmd += ` --effort max`;
+    }
+    console.log(grokCmd);
   }
-  console.log("\nCodex prompt:\n");
+  console.log("\nPrompt:\n");
   console.log(prompt);
 }
 

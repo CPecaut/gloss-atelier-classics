@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "setId": "world-classics-seed",
+  "chunkId": "herodotus-histories-0001",
+  "stage": "illustration",
+  "owner": "@you",
+  "status": "submitted",
+  "submittedAt": "2026-07-07T08:42:44.592Z",
+  "notes": "Generated via Grok CLI + /imagine support added to project. Image stored in incoming/ (gitignored).",
+  "artifact": {
+    "source": {
+      "work": "Herodotus, Histories",
+      "originalTitle": "Ἱστορίαι",
+      "language": "Ancient Greek",
+      "sourceUrl": "https://raw.githubusercontent.com/PerseusDL/canonical-greekLit/master/data/tlg0016/tlg001/tlg0016.tlg001.perseus-grc2.xml",
+      "browseUrl": "https://scaife.perseus.org/library/urn:cts:greekLit:tlg0016/",
+      "repository": "https://github.com/PerseusDL/canonical-greekLit",
+      "ctsUrn": "urn:cts:greekLit:tlg0016.tlg001.perseus-grc2",
+      "unitPattern": "book.chapter.section",
+      "sourceRefs": [
+        "1.1.0",
+        "1.1.1",
+        "1.1.2",
+        "1.1.3",
+        "1.1.4"
+      ],
+      "plannedCoverage": "0-0.1%",
+      "actualBoundary": "book 1, chapter 1, sections 0-4 (snapped to CTS)"
+    },
+    "finalPrompt": "Ionian field notebook page: reed-pen linework, sea-weathered blues, red-figure silhouette accents, clear map labels, consistent traveler-narrator presence. On left, Herodotus (bearded Ionian Greek in plain mantle) sits writing on papyrus or wax tablet beside a labeled map of Aegean, eastern Med, with routes to Phoenicia, Argos, Egypt. On right, scene of Phoenician traders at Argos displaying Egyptian and Assyrian cargo at ship stern; Io (king's daughter) and other women approach to buy. Documentary historical illustration tone, no modern clothing/objects/fantasy effects, high contrast margin ornaments, clear labels \"Halicarnassus\", \"Argos\", \"Phoenicia\", \"Egypt\", \"Red Sea\".",
+    "style": "Ionian field notebook: reed-pen linework, sea-weathered blues, red-figure silhouette accents, clear map labels, consistent traveler-narrator presence.",
+    "continuityNotes": [
+      "Keep Herodotus as a recurring traveler-recorder: bearded Ionian Greek, plain mantle, wax tablets or papyrus roll, observational rather than heroic pose.",
+      "Use the same sea-weathered blue wash and red-figure accents planned for the world-classics-seed Herodotus sequence.",
+      "Treat Io and the Phoenician traders as early mythic-history figures, not fantasy characters; avoid anachronistic ships, clothing, or weapons."
+    ],
+    "imageRef": "tracking/sets/world-classics-seed/incoming/herodotus-histories-0001-illustration.jpg",
+    "generatedWith": "/imagine",
+    "uncertainties": [
+      "The exact visual composition balances the writer + map scene with the market abduction scene; may iterate on layout for better notebook-page feel.",
+      "Ship details kept historical (no anachronisms) per source and aesthetic."
+    ],
+    "reviewNotes": [
+      "Based on translation output's illustrationPromptSeed and chunk promptSeed.",
+      "Image generated via Grok imagine integration for the opening inquiry + Phoenician/Io scene from 1.1."
+    ],
+    "modelRoute": "grok --prompt-file tracking/sets/world-classics-seed/claims/illustration/herodotus-histories-0001--you.prompt.md --output-format json ; /imagine (via Grok Build image tools)"
+  }
+}

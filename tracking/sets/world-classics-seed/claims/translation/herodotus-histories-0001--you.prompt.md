@@ -13,3 +13,5 @@ For each chunk:
 5. Include source URL, source refs, model/command route, uncertainties, and review notes.
 
 Use account-auth CLI routes only; do not use API-key SDK calls.
+
+When running: grok --prompt-file <this> --output-format json --effort max (for translation)
