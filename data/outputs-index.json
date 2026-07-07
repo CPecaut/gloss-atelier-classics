@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "generatedAt": "2026-07-07T08:23:22.807Z",
+  "sets": {
+    "world-classics-seed": {
+      "outputs": {
+        "gloss": [],
+        "illustration": [],
+        "review": [],
+        "translation": [
+          "herodotus-histories-0001"
+        ]
+      }
+    }
+  }
+}

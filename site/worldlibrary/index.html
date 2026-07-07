@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Public tracker for collaborative gloss-annotated classical translations and illustration prompts."
+    />
+    <title>World Library · SpeakReading</title>
+    <link rel="stylesheet" href="./worldlibrary.css" />
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <div>
+          <p class="eyebrow">SpeakReading World Library</p>
+          <h1>Gloss-Annotated Classics in Progress</h1>
+          <p class="lede">
+            Public tracker for source texts, chunk progress, translation outputs, glosses, and
+            illustration prompt seeds.
+          </p>
+        </div>
+        <div class="script-panel" aria-hidden="true">
+          <span>Ἱστορίαι</span>
+          <span>شاهنامه</span>
+          <span>Metamorphoses</span>
+          <span>三國演義</span>
+        </div>
+      </header>
+
+      <section class="metrics" id="metrics" aria-label="Project metrics"></section>
+
+      <section class="toolbar" aria-label="Filters">
+        <label>
+          Search
+          <input id="search" type="search" placeholder="source, chunk, Greek, translation..." />
+        </label>
+        <label>
+          Source
+          <select id="source-filter"></select>
+        </label>
+        <label>
+          Stage
+          <select id="stage-filter">
+            <option value="all">All stages</option>
+            <option value="translation">Translation</option>
+            <option value="gloss">Gloss</option>
+            <option value="illustration">Illustration</option>
+            <option value="review">Review</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="layout">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Sources</h2>
+            <span id="generated-at"></span>
+          </div>
+          <div class="source-list" id="source-list"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Outputs</h2>
+            <span id="output-count"></span>
+          </div>
+          <div class="output-list" id="output-list"></div>
+        </div>
+      </section>
+
+      <section class="panel output-detail" id="output-detail"></section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Chunk Ledger</h2>
+          <span id="chunk-count"></span>
+        </div>
+        <div class="chunk-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Chunk</th>
+                <th>Source</th>
+                <th>Coverage</th>
+                <th>Translation</th>
+                <th>Gloss</th>
+                <th>Illustration</th>
+                <th>Review</th>
+              </tr>
+            </thead>
+            <tbody id="chunk-table"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer>
+        <span>Data is generated from the public repository ledger.</span>
+        <a id="repo-link" href="https://github.com/CPecaut/gloss-atelier-classics">Contribute on GitHub</a>
+      </footer>
+    </main>
+
+    <script type="module" src="./worldlibrary.js"></script>
+  </body>
+</html>

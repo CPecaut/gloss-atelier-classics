@@ -5,14 +5,20 @@
   "type": "module",
   "description": "GitHub-native tracker for collaborative gloss-annotated classical translation and illustration sets.",
   "scripts": {
+    "predev": "node scripts/ensure-public-data.mjs",
     "dev": "vite --host 127.0.0.1",
+    "prebuild": "node scripts/ensure-public-data.mjs",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
+    "public:data": "node scripts/ensure-public-data.mjs",
     "sources:check": "node scripts/locate-sources.mjs",
     "set:new": "node scripts/new-set.mjs",
     "claim": "node scripts/claim.mjs",
     "complete": "node scripts/complete.mjs",
     "concurrency": "node scripts/set-concurrency.mjs",
+    "worldlibrary:build": "node scripts/build-worldlibrary-site.mjs",
+    "worldlibrary:publish-local": "node scripts/build-worldlibrary-site.mjs --copy-to /Users/oracle/code/contemplatio/public/worldlibrary",
+    "worldlibrary:deploy": "node scripts/deploy-worldlibrary.mjs",
     "validate": "node scripts/validate.mjs"
   },
   "dependencies": {
@@ -25,4 +31,3 @@
   },
   "devDependencies": {}
 }
-

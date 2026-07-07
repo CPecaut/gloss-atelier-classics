@@ -10,3 +10,6 @@ tracking/sets/*/incoming/
 tracking/sets/*/assets/generated/
 *.log
 
+# large data served for the public World Library viewer (copied at build/dev time)
+public/data/world-classics-seed/chunks.jsonl
+

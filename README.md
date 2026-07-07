@@ -18,7 +18,29 @@ npm install
 npm run dev
 ```
 
+The default view is the **public World Library viewer** (for speakreading.com/worldlibrary). It tracks progress and lets anyone browse published outputs (source + literal/reader translations + gloss tables + illustration seeds).
+
+The original production controls are available via the "Production Atelier" link in the header.
+
 Open the local URL printed by Vite.
+
+Build the static public site:
+
+```bash
+npm run worldlibrary:build
+```
+
+Publish it into the local SpeakReading static tree:
+
+```bash
+npm run worldlibrary:publish-local
+```
+
+Deploy it to `https://speakreading.com/worldlibrary/`:
+
+```bash
+npm run worldlibrary:deploy
+```
 
 Validate data and source locators:
 
@@ -68,4 +90,3 @@ npm run set:new -- \
 ## Collaboration Rule
 
 Claim before generating. Submit one chunk output file per stage. Pull requests that touch the same output file will conflict visibly, and CI rejects duplicate active claims.
-

@@ -1,9 +1,12 @@
 import {
+  BookOpen,
   CheckCircle2,
   Clipboard,
+  ExternalLink,
   Eye,
   Gauge,
   GitBranch,
+  Globe,
   Image as ImageIcon,
   Languages,
   RefreshCcw,
@@ -14,7 +17,10 @@ import {
 } from "lucide-react";
 import catalog from "../data/source-catalog.json";
 import sourceStatus from "../data/source-status.json";
-import { useMemo, useState } from "react";
+import outputsIndex from "../data/outputs-index.json";
+import manifest from "../tracking/sets/world-classics-seed/manifest.json";
+import sampleTranslation from "../tracking/sets/world-classics-seed/outputs/translation/herodotus-histories-0001.json";
+import { useEffect, useMemo, useState } from "react";
 
 const stages = ["translation", "gloss", "illustration", "review"];
 
@@ -70,6 +76,229 @@ function makeSampleQueue(sources, stage) {
 
 function getSourceStatus(sourceId) {
   return sourceStatus.sources.find((source) => source.id === sourceId);
+}
+
+// ---- Public World Library helpers & components ----
+
+function getCompletedForSet(setId) {
+  const set = outputsIndex.sets?.[setId] || { outputs: {} };
+  const completed = {};
+  for (const [stage, ids] of Object.entries(set.outputs || {})) {
+    completed[stage] = new Set(ids);
+  }
+  return completed;
+}
+
+function countBySource(completedSet, stage) {
+  const counts = {};
+  const ids = Array.from(completedSet[stage] || []);
+  for (const id of ids) {
+    // chunk ids are like "herodotus-histories-0001"
+    const src = id.split("-").slice(0, -1).join("-");
+    counts[src] = (counts[src] || 0) + 1;
+  }
+  return counts;
+}
+
+function getChunksForSource(_sourceId) {
+  // Deprecated: chunks are loaded via state + fetch in the viewer. Kept for compatibility.
+  return [];
+}
+
+function formatCoverage(cov) {
+  if (!cov) return "";
+  if (typeof cov === "string") return cov;
+  if (!Number.isFinite(cov.startPercent) || !Number.isFinite(cov.endPercent)) return "";
+  return `${cov.startPercent.toFixed(1)}–${cov.endPercent.toFixed(1)}%`;
+}
+
+function formatBoundary(value) {
+  if (!value) return "";
+  if (typeof value === "string") return value;
+  if (value.startRef && value.endRef) return `${value.startRef}-${value.endRef}`;
+  if (Number.isFinite(value.startPercent) && Number.isFinite(value.endPercent)) {
+    return `${value.startPercent}-${value.endPercent}%`;
+  }
+  return "";
+}
+
+function rowsToText(rows, key) {
+  if (!Array.isArray(rows)) return "";
+  return rows.map((row) => `${row.ref ? `${row.ref}: ` : ""}${row[key] ?? ""}`).join("\n\n");
+}
+
+function modelRouteText(route) {
+  if (!route) return "";
+  if (typeof route === "string") return route;
+  return Object.entries(route)
+    .map(([key, value]) => `${key}: ${value}`)
+    .join(" · ");
+}
+
+function ArtifactViewer({ output }) {
+  if (!output || !output.artifact) return <div className="artifact-empty">No artifact loaded.</div>;
+  const art = output.artifact;
+  const src = art.source || {};
+  const ill = art.illustrationPromptSeed || {};
+  const boundary = formatBoundary(src.actualBoundary) || formatBoundary(src.plannedCoverage);
+  const sourceExcerpt = art.sourceExcerpt || rowsToText(art.sourceExcerptReferences, "greek");
+  const readerTranslation =
+    art.readerTranslation || art.combinedReaderTranslation || rowsToText(art.readerTranslations, "translation");
+  const literalTranslation =
+    art.literalTranslation || rowsToText(art.literalTranslations, "translation");
+
+  return (
+    <div className="artifact-viewer">
+      <div className="art-meta">
+        <span className="art-chip">{output.chunkId}</span>
+        {boundary && <span className="art-chip">{boundary}</span>}
+        <a href={src.browseUrl} target="_blank" rel="noreferrer" className="art-link">
+          source <ExternalLink size={14} />
+        </a>
+      </div>
+
+      <section className="art-section source-excerpt">
+        <h4>Source</h4>
+        <p className="greek-text">{sourceExcerpt}</p>
+        <div className="cite">
+          {src.work} · {src.ctsUrn} · <span className="muted">{boundary}</span>
+        </div>
+      </section>
+
+      <section className="art-section reader">
+        <h4>Reader translation</h4>
+        <p className="reader-text">{readerTranslation}</p>
+      </section>
+
+      <section className="art-section literal">
+        <h4>Literal translation</h4>
+        <p className="literal-text">{literalTranslation}</p>
+      </section>
+
+      <section className="art-section gloss">
+        <h4>Gloss</h4>
+        <div className="gloss-grid">
+          {art.glosses?.map((g, i) => (
+            <div key={i} className="gloss-entry">
+              <div className="greek">{g.greek}</div>
+              <div className="lemma">{g.lemma}</div>
+              <div className="gloss">{g.gloss}</div>
+              <div className="morph">{g.morphology}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="art-section prompt">
+        <h4>Illustration prompt seed</h4>
+        <div className="prompt-box">
+          <p><strong>Style:</strong> {ill.style}</p>
+          <p>{ill.prompt}</p>
+          {ill.continuityNotes?.length > 0 && (
+            <ul>
+              {ill.continuityNotes.map((note, i) => (
+                <li key={i}>{note}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </section>
+
+      {art.uncertainties && art.uncertainties.length > 0 && (
+        <section className="art-section notes">
+          <h4>Notes &amp; uncertainties</h4>
+          <ul>
+            {art.uncertainties.map((u, i) => (
+              <li key={i}>{u}</li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <div className="art-footer">
+        <span>Submitted {new Date(output.submittedAt).toLocaleDateString()}</span>
+        <span>by {output.owner}</span>
+        <span className="muted">{modelRouteText(art.modelRoute)}</span>
+      </div>
+    </div>
+  );
+}
+
+function WorkCard({ source, completed, onExplore }) {
+  const perSource = countBySource(completed, "translation");
+  const transDone = perSource[source.id] || 0;
+  const totalPlanned = 1000; // from manifest for seed (4000/4)
+  const pct = Math.round((transDone / totalPlanned) * 1000) / 10; // show as 0.x %
+
+  return (
+    <article className="work-card">
+      <div className="work-head">
+        <div>
+          <h3>{source.title}</h3>
+          <div className="orig">{source.originalTitle}</div>
+        </div>
+        <span className="lang">{source.language}</span>
+      </div>
+      <p className="work-author">{source.author} · {source.period}</p>
+
+      <div className="progress-row">
+        <div className="progress-label">Translation</div>
+        <div className="progress-bar"><div style={{ width: `${Math.min(100, (transDone / totalPlanned) * 100)}%` }} /></div>
+        <div className="progress-num">{transDone} / {totalPlanned} chunks</div>
+      </div>
+
+      <div className="work-meta">
+        <span>{source.sourceFamily}</span>
+      </div>
+
+      <div className="work-actions">
+        <button onClick={() => onExplore(source)} className="primary">
+          <BookOpen size={16} /> Browse outputs
+        </button>
+        <a href={source.primaryUrl} target="_blank" rel="noreferrer">
+          View source <ExternalLink size={14} />
+        </a>
+      </div>
+    </article>
+  );
+}
+
+function ChunkList({ chunks, completed, onSelectChunk, selectedId }) {
+  const [filter, setFilter] = useState("");
+  const filtered = chunks.filter((c) =>
+    !filter || c.id.toLowerCase().includes(filter.toLowerCase()) || formatCoverage(c.coverage).includes(filter)
+  ).slice(0, 60); // limit for perf
+
+  return (
+    <div className="chunk-browser">
+      <div className="browser-head">
+        <div className="panel-title"><Search size={17} /><h3>Chunks</h3></div>
+        <input
+          className="filter-input"
+          placeholder="Filter by id or range…"
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+        />
+      </div>
+      <div className="chunk-list">
+        {filtered.map((c) => {
+          const isDone = completed.translation?.has(c.id);
+          return (
+            <button
+              key={c.id}
+              className={`chunk-row ${c.id === selectedId ? "active" : ""} ${isDone ? "done" : ""}`}
+              onClick={() => onSelectChunk(c)}
+            >
+              <span className="cid">{c.id}</span>
+              <span className="cov">{formatCoverage(c.coverage)}</span>
+              <span className={`cstatus ${isDone ? "done" : "open"}`}>{isDone ? "ready" : "open"}</span>
+            </button>
+          );
+        })}
+        {chunks.length > 60 && <div className="more-note">Showing first 60 matches. Use filter to narrow.</div>}
+      </div>
+    </div>
+  );
 }
 
 function statusLabel(status) {
@@ -212,6 +441,9 @@ function ReviewPanel({ chunk, decisions, setDecisions }) {
 }
 
 function App() {
+  const [mode, setMode] = useState("viewer"); // "viewer" | "atelier"
+
+  // Atelier state (preserved)
   const [selectedSources, setSelectedSources] = useStoredState(
     "gloss-atelier:selected-sources",
     catalog.sources.map((source) => source.id)
@@ -245,14 +477,256 @@ function App() {
     await navigator.clipboard.writeText(command);
   };
 
+  // ---- World Library public viewer state ----
+  const BASE_URL = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) ? import.meta.env.BASE_URL : '/';
+  const asset = (p) => `${BASE_URL}${p}`.replace(/\/+/g, '/');
+  const completed = useMemo(() => getCompletedForSet(manifest.id), []);
+  const [selectedWork, setSelectedWork] = useState(null);
+  const [viewedChunk, setViewedChunk] = useState(null);
+  const [viewedOutput, setViewedOutput] = useState(null);
+  const [loadedChunks, setLoadedChunks] = useState([
+    // Minimal seeds so lists are usable immediately; full file loads async
+    {"id":"herodotus-histories-0001","setId":"world-classics-seed","sourceId":"herodotus-histories","coverage":{"startPercent":0,"endPercent":0.1,"chunkPercent":0.1}},
+    {"id":"shahnameh-0001","setId":"world-classics-seed","sourceId":"shahnameh","coverage":{"startPercent":0,"endPercent":0.1,"chunkPercent":0.1}},
+    {"id":"ovid-metamorphoses-0001","setId":"world-classics-seed","sourceId":"ovid-metamorphoses","coverage":{"startPercent":0,"endPercent":0.1,"chunkPercent":0.1}},
+    {"id":"romance-three-kingdoms-0001","setId":"world-classics-seed","sourceId":"romance-three-kingdoms","coverage":{"startPercent":0,"endPercent":0.1,"chunkPercent":0.1}}
+  ]);
+
+  // Lazy load chunks.jsonl only when viewer uses it (keeps main bundle small)
+  useEffect(() => {
+    if (mode !== "viewer") return;
+    let cancelled = false;
+    // Try public copy first, fall back to direct (works in some deploys)
+    const urls = [
+      asset("data/world-classics-seed/chunks.jsonl"),
+      "/tracking/sets/world-classics-seed/chunks.jsonl" // fallback only for local dev from root
+    ];
+    (async () => {
+      for (const url of urls) {
+        try {
+          const res = await fetch(url);
+          if (!res.ok) continue;
+          const text = await res.text();
+          const parsed = text
+            .trim()
+            .split("\n")
+            .filter(Boolean)
+            .map((line) => { try { return JSON.parse(line); } catch { return null; } })
+            .filter(Boolean);
+          if (!cancelled && parsed.length > 0) {
+            setLoadedChunks(parsed);
+            return;
+          }
+        } catch {}
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [mode]);
+
+  const sourceChunks = useMemo(() => {
+    if (!selectedWork) return [];
+    return loadedChunks.filter((c) => c.sourceId === selectedWork.id);
+  }, [selectedWork, loadedChunks]);
+
+  const openWork = (source) => {
+    setSelectedWork(source);
+    setViewedChunk(null);
+    setViewedOutput(null);
+    // auto-open the sample if available for herodotus
+    if (source.id === "herodotus-histories" && completed.translation?.has("herodotus-histories-0001")) {
+      // The chunk metadata will come from loadedChunks on next render; seed a minimal one for immediate view
+      const minimalChunk = {
+        id: "herodotus-histories-0001",
+        sourceId: "herodotus-histories",
+        coverage: { startPercent: 0, endPercent: 0.1, chunkPercent: 0.1 }
+      };
+      setViewedChunk(minimalChunk);
+      setViewedOutput(sampleTranslation);
+    }
+  };
+
+  const selectChunkForView = (chunk) => {
+    setViewedChunk(chunk);
+    // For now only the known sample has real output; future: dynamic load or pre-bundled
+    if (chunk.id === "herodotus-histories-0001") {
+      setViewedOutput(sampleTranslation);
+    } else {
+      setViewedOutput(null); // placeholder until more outputs exist
+    }
+  };
+
+  const closeWork = () => {
+    setSelectedWork(null);
+    setViewedChunk(null);
+    setViewedOutput(null);
+  };
+
+  const totalCompleted = Object.values(completed).reduce((sum, set) => sum + set.size, 0);
+
+  // ---- Render ----
+  if (mode === "viewer") {
+    return (
+      <main className="wl-main">
+        <nav className="wl-nav">
+          <div className="nav-left">
+            <span className="brand">speak, reading</span>
+            <span className="sep">·</span>
+            <span className="section">World Library</span>
+          </div>
+          <div className="nav-actions">
+            <button onClick={() => setMode("atelier")} className="nav-link">Production Atelier</button>
+            <a href="https://speakreading.com" target="_blank" rel="noreferrer">speakreading.com <ExternalLink size={13} /></a>
+          </div>
+        </nav>
+
+        <header className="wl-hero">
+          <div className="hero-content">
+            <p className="eyebrow">Public editions</p>
+            <h1>World Library</h1>
+            <p className="lead">
+              Annotated translations of classical texts. Each passage includes the original, a literal rendering,
+              a fluent reader translation, a detailed gloss, and seeds for consistent illustration.
+            </p>
+            <div className="hero-stats">
+              <div><strong>{catalog.sources.length}</strong> works</div>
+              <div><strong>{manifest.chunkCount}</strong> planned chunks</div>
+              <div><strong>{totalCompleted}</strong> outputs published</div>
+            </div>
+          </div>
+          <div className="hero-visual">
+            <img src={asset("assets/script-mosaic.svg")} alt="" />
+          </div>
+        </header>
+
+        <section className="wl-collection">
+          <div className="section-head">
+            <h2>The Collection</h2>
+            <p>Seed set · {manifest.id}</p>
+          </div>
+
+          <div className="works-grid">
+            {catalog.sources.map((source) => (
+              <WorkCard
+                key={source.id}
+                source={source}
+                completed={completed}
+                onExplore={openWork}
+              />
+            ))}
+          </div>
+        </section>
+
+        {selectedWork && (
+          <section className="wl-work-detail">
+            <div className="detail-head">
+              <div>
+                <button className="close-btn" onClick={closeWork}>← Back to collection</button>
+                <h2>{selectedWork.title} <span className="orig-inline">{selectedWork.originalTitle}</span></h2>
+                <p className="detail-sub">{selectedWork.author} · {selectedWork.period} · {selectedWork.language}</p>
+              </div>
+              <div className="detail-links">
+                <a href={selectedWork.primaryUrl} target="_blank" rel="noreferrer">Primary source <ExternalLink size={14}/></a>
+                <a href={selectedWork.rawUrl} target="_blank" rel="noreferrer">Raw text <ExternalLink size={14}/></a>
+              </div>
+            </div>
+
+            <div className="detail-body">
+              <div className="detail-sidebar">
+                <div className="progress-panel">
+                  <h4>Progress in seed set</h4>
+                  {stages.map((st) => {
+                    const done = (completed[st] && completed[st].size) || 0;
+                    const pct = Math.round((done / manifest.chunkCount) * 100);
+                    return (
+                      <div key={st} className="mini-progress">
+                        <div className="mini-label">{st} <span>{done}</span></div>
+                        <div className="mini-bar"><div style={{width: `${pct}%`}} /></div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div className="rights-note">
+                  {selectedWork.rightsNote}
+                </div>
+              </div>
+
+              <div className="detail-main">
+                <ChunkList
+                  chunks={sourceChunks}
+                  completed={completed}
+                  onSelectChunk={selectChunkForView}
+                  selectedId={viewedChunk?.id}
+                />
+
+                {viewedChunk && (
+                  <div className="viewed-chunk">
+                    <div className="viewed-head">
+                      <div>
+                        <strong>{viewedChunk.id}</strong> · {formatCoverage(viewedChunk.coverage)}
+                      </div>
+                      <div className="viewed-actions">
+                        {viewedOutput ? <span className="ready-pill">output ready</span> : <span className="open-pill">in production</span>}
+                      </div>
+                    </div>
+
+                    {viewedOutput ? (
+                      <ArtifactViewer output={viewedOutput} />
+                    ) : (
+                      <div className="no-output">
+                        <p>This chunk has not been published yet.</p>
+                        <p className="muted">Outputs appear here once submitted and accepted into the set.</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {!viewedChunk && (
+                  <div className="empty-hint">
+                    Select a chunk from the list above to view its translation, gloss, and illustration prompt.
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {!selectedWork && totalCompleted > 0 && (
+          <section className="quick-sample">
+            <div className="sample-card" onClick={() => {
+              const her = catalog.sources.find(s => s.id === "herodotus-histories");
+              if (her) openWork(her);
+            }}>
+              <div>Featured sample</div>
+              <strong>Herodotus Histories 1.1 — opening of the inquiry</strong>
+              <span>Tap to read the first published chunk →</span>
+            </div>
+          </section>
+        )}
+
+        <footer className="wl-footer">
+          <p>
+            Outputs are generated from public domain sources. Glosses, reader translations, and illustration seeds are contributed under open terms.
+            Track progress and contribute via the <button className="inline-btn" onClick={() => setMode("atelier")}>Atelier</button>.
+          </p>
+          <p className="small">Data served from this repository. speakreading.com/worldlibrary</p>
+        </footer>
+      </main>
+    );
+  }
+
+  // ATELIER MODE (original internal tool)
   return (
     <main>
       <header className="app-header">
         <div>
-          <p className="eyebrow">Gloss Atelier</p>
+          <p className="eyebrow">Gloss Atelier · internal</p>
           <h1>Classical Translation and Illustration Queue</h1>
         </div>
-        <img className="script-mosaic" src="/assets/script-mosaic.svg" alt="" />
+        <div style={{display:'flex', gap:12, alignItems:'center'}}>
+          <button onClick={() => setMode("viewer")} style={{background:'transparent', border:'1px solid var(--border)', padding:'6px 12px'}}>← World Library</button>
+          <img className="script-mosaic" src={asset("assets/script-mosaic.svg")} alt="" />
+        </div>
       </header>
 
       <section className="metrics-row">
