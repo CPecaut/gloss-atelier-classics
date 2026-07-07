@@ -137,6 +137,11 @@ async function main() {
 
   console.log(`Claimed ${selected.length} ${stage} chunk(s):`);
   for (const chunk of selected) console.log(`- ${chunk.id}`);
+  console.log("\nPrompt file command(s):");
+  for (const chunk of selected) {
+    const promptPath = `tracking/sets/${setId}/claims/${stage}/${chunk.id}--${ownerSlug}.prompt.md`;
+    console.log(`codex exec --cd "$PWD" "$(cat ${promptPath})"`);
+  }
   console.log("\nCodex prompt:\n");
   console.log(prompt);
 }
@@ -145,4 +150,3 @@ main().catch((error) => {
   console.error(error.message);
   process.exit(1);
 });
-

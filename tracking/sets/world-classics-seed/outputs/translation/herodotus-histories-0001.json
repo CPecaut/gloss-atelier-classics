@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "setId": "world-classics-seed",
+  "chunkId": "herodotus-histories-0001",
+  "stage": "translation",
+  "owner": "@you",
+  "status": "submitted",
+  "submittedAt": "2026-07-07T08:19:00.000Z",
+  "notes": "Tiny kickoff sample. The planned 0-0.1% span was snapped to the opening natural CTS boundary, Herodotus Histories 1.1.0.",
+  "artifact": {
+    "source": {
+      "work": "Herodotus, Histories",
+      "language": "Ancient Greek",
+      "sourceUrl": "https://raw.githubusercontent.com/PerseusDL/canonical-greekLit/master/data/tlg0016/tlg001/tlg0016.tlg001.perseus-grc2.xml",
+      "browseUrl": "https://scaife.perseus.org/library/urn:cts:greekLit:tlg0016/",
+      "ctsUrn": "urn:cts:greekLit:tlg0016.tlg001.perseus-grc2:1.1.0",
+      "plannedCoverage": "0-0.1%",
+      "actualBoundary": "book 1, chapter 1, section 0"
+    },
+    "sourceExcerpt": "Ἡροδότου Ἁλικαρνησσέος ἱστορίης ἀπόδεξις ἥδε, ὡς μήτε τὰ γενόμενα ἐξ ἀνθρώπων τῷ χρόνῳ ἐξίτηλα γένηται, μήτε ἔργα μεγάλα τε καὶ θωμαστά, τὰ μὲν Ἕλλησι τὰ δὲ βαρβάροισι ἀποδεχθέντα, ἀκλεᾶ γένηται, τά τε ἄλλα καὶ διʼ ἣν αἰτίην ἐπολέμησαν ἀλλήλοισι.",
+    "literalTranslation": "This is the presentation of the inquiry of Herodotus of Halicarnassus, so that neither the things that have come to be from human beings may become faded away by time, nor great and wondrous deeds, some displayed by Greeks and others by foreigners, may become without glory, and also, among other things, the cause for which they fought one another.",
+    "readerTranslation": "Here Herodotus of Halicarnassus sets out his inquiry: so that human events will not be erased by time, so that the great and astonishing deeds of Greeks and non-Greeks alike will not lose their fame, and so that the cause of their war with one another may be known.",
+    "glosses": [
+      {
+        "greek": "Ἡροδότου",
+        "lemma": "Ἡρόδοτος",
+        "morphology": "genitive singular masculine",
+        "gloss": "of Herodotus"
+      },
+      {
+        "greek": "Ἁλικαρνησσέος",
+        "lemma": "Ἁλικαρνησσεύς",
+        "morphology": "genitive singular masculine",
+        "gloss": "of Halicarnassus"
+      },
+      {
+        "greek": "ἱστορίης",
+        "lemma": "ἱστορίη",
+        "morphology": "genitive singular feminine",
+        "gloss": "inquiry"
+      },
+      {
+        "greek": "ἀπόδεξις",
+        "lemma": "ἀπόδεξις",
+        "morphology": "nominative singular feminine",
+        "gloss": "display, presentation"
+      },
+      {
+        "greek": "ἥδε",
+        "lemma": "ὅδε",
+        "morphology": "nominative singular feminine demonstrative",
+        "gloss": "this"
+      },
+      {
+        "greek": "μήτε ... μήτε",
+        "lemma": "μήτε",
+        "morphology": "coordinating negative particles",
+        "gloss": "neither ... nor"
+      },
+      {
+        "greek": "τὰ γενόμενα",
+        "lemma": "γίγνομαι",
+        "morphology": "aorist middle participle, neuter plural substantive",
+        "gloss": "the things that happened"
+      },
+      {
+        "greek": "ἐξ ἀνθρώπων",
+        "lemma": "ἄνθρωπος",
+        "morphology": "preposition plus genitive plural",
+        "gloss": "from human beings"
+      },
+      {
+        "greek": "τῷ χρόνῳ",
+        "lemma": "χρόνος",
+        "morphology": "dative singular masculine",
+        "gloss": "by time"
+      },
+      {
+        "greek": "ἐξίτηλα",
+        "lemma": "ἐξίτηλος",
+        "morphology": "nominative neuter plural predicate adjective",
+        "gloss": "faded, erased"
+      },
+      {
+        "greek": "ἔργα μεγάλα τε καὶ θωμαστά",
+        "lemma": "ἔργον / μέγας / θωμαστός",
+        "morphology": "neuter plural noun phrase",
+        "gloss": "great and wondrous deeds"
+      },
+      {
+        "greek": "Ἕλλησι",
+        "lemma": "Ἕλλην",
+        "morphology": "dative plural masculine",
+        "gloss": "by Greeks"
+      },
+      {
+        "greek": "βαρβάροισι",
+        "lemma": "βάρβαρος",
+        "morphology": "dative plural masculine",
+        "gloss": "by non-Greeks, foreigners"
+      },
+      {
+        "greek": "ἀποδεχθέντα",
+        "lemma": "ἀποδείκνυμι",
+        "morphology": "aorist passive participle, neuter plural",
+        "gloss": "shown, displayed, performed"
+      },
+      {
+        "greek": "ἀκλεᾶ",
+        "lemma": "ἀκλεής",
+        "morphology": "nominative neuter plural predicate adjective",
+        "gloss": "without glory"
+      },
+      {
+        "greek": "διʼ ἣν αἰτίην",
+        "lemma": "αἰτίη",
+        "morphology": "preposition plus accusative singular feminine relative phrase",
+        "gloss": "for which cause"
+      },
+      {
+        "greek": "ἐπολέμησαν",
+        "lemma": "πολεμέω",
+        "morphology": "aorist active indicative third plural",
+        "gloss": "they made war"
+      },
+      {
+        "greek": "ἀλλήλοισι",
+        "lemma": "ἀλλήλων",
+        "morphology": "dative plural reciprocal",
+        "gloss": "with one another"
+      }
+    ],
+    "illustrationPromptSeed": {
+      "style": "Ionian field notebook: reed-pen linework, sea-weathered blues, red-figure silhouette accents, clear map labels, consistent traveler-narrator presence.",
+      "prompt": "Opening page for Herodotus's inquiry: a seated Ionian recorder from Halicarnassus unfurls a map between Greek and Persian worlds, with small margin vignettes of ships, cities, and opposing armies. Preserve a documentary notebook feel, use restrained sea-blue washes and red-figure accents, no modern clothing, no fantasy effects."
+    },
+    "uncertainties": [
+      "`ἀπόδεξις` can be rendered as display, publication, or presentation; `sets out` was chosen for the reader version.",
+      "`βαρβάροισι` is translated as `non-Greeks` in the reader version to avoid importing a modern pejorative tone.",
+      "The chunk boundary is intentionally smaller than the whole 0.1% span for a tiny kickoff sample."
+    ],
+    "modelRoute": "Created in Codex desktop from public Perseus TEI using account-auth workflow; no API-key SDK calls."
+  }
+}
